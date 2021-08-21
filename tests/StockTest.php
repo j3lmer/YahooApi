@@ -11,7 +11,6 @@ class StockTest extends KernelTestCase
     /** @var EntityManagerInterface */
     private $entityManager;
 
-
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
@@ -19,7 +18,6 @@ class StockTest extends KernelTestCase
         DatabasePrimer::prime($kernel);
         $this->entityManager = $kernel->getContainer()->get('doctrine')->getManager();
     }
-
     protected function tearDown(): void
     {
         parent::tearDown();
@@ -31,8 +29,7 @@ class StockTest extends KernelTestCase
     /** @test */
     public function a_stock_record_can_be_created_in_the_database()
     {
-        //Setup
-
+        // SETUP //
         //Stock
         $stock = new Stock();
         $stock->setSymbol('AMZN');
@@ -52,15 +49,13 @@ class StockTest extends KernelTestCase
         $this->entityManager->persist($stock);
 
 
-
-        //Do something
+        // DO SOMETHING //
         $this->entityManager->flush();
-
         $stockRepository = $this->entityManager->getRepository(Stock::class);
-
         $stockRecord = $stockRepository->findOneBy(['symbol' => 'AMZN']);
 
-        //Make assertions
+
+        // MAKE ASSERTIONS //
         $this->assertEquals('Amazon Inc', $stockRecord->getShortName());
         $this->assertEquals('AMZN', $stockRecord->getSymbol());
         $this->assertEquals('USD', $stockRecord->getCurrency());
