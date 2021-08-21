@@ -10,4 +10,6 @@
 
 ## Things I do not yet understand.
 
-`self::bootKernel`
+`self::bootKernel`.
+
+Why env.local is not read but .env is.

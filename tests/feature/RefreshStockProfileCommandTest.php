@@ -3,31 +3,16 @@
 namespace App\Tests\feature;
 
 use App\Entity\Stock;
+use App\Tests\DatabaseDependantTestCase;
 use App\Tests\DatabasePrimer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
 
-class RefreshStockProfileCommandTest extends KernelTestCase
+class RefreshStockProfileCommandTest extends DatabaseDependantTestCase
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
 
-    protected function setUp(): void
-    {
-        $kernel = self::bootKernel();
-
-        DatabasePrimer::prime($kernel);
-        $this->entityManager = $kernel->getContainer()->get('doctrine')->getManager();
-    }
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-        $this->entityManager->close();
-        $this->entityManager = null;
-    }
 
 
     /** @test  */
