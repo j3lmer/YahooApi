@@ -23,7 +23,6 @@ class YahooFinanceApiClientTest extends DatabaseDependantTestCase
         $stockProfile = json_decode($response->getContent());
 
 
-
         // MAKE ASSERTIONS //
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertSame('USD', $stockProfile->currency);

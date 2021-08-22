@@ -47,10 +47,4 @@ class StockTest extends DatabaseDependantTestCase
         $this->assertEquals(1100, $stockRecord->getPreviousClose());
         $this->assertEquals(-100, $stockRecord->getPriceChange());
     }
-
-
-    public function testItWorks()
-    {
-        $this->assertTrue(true);
-    }
 }

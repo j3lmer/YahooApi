@@ -2,10 +2,11 @@
 
 namespace App\Http;
 
+use MongoDB\Driver\Command;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class YahooFinanceApiClient
+class YahooFinanceApiClient implements FinanceApiClientInterface
 {
     /** @var HttpClientInterface  */
     private HttpClientInterface $httpClient;
@@ -36,7 +37,7 @@ class YahooFinanceApiClient
         // @todo handle non 200 responses
         if ($response->getStatusCode() !== 200) {
 
-            // return a non 200 response here
+            return new JsonResponse('Finance API client error', 400);
         }
 
         $stockProfile = json_decode($response->getContent())->price;
@@ -54,6 +55,5 @@ class YahooFinanceApiClient
         ];
 
         return new JsonResponse($stockProfileAsArray, 200);
-
     }
 }
