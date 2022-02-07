@@ -2,6 +2,7 @@
 
 namespace App\Tests;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -15,6 +16,7 @@ class DatabasePrimer
         }
 
         // Get the entity manager from the service container
+        /** @var EntityManager $entityManager */
         $entityManager = $kernel->getContainer()->get('doctrine.orm.entity_manager');
 
         // Run the schema update tool using our entity metadata
